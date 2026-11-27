@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export function SolicitudForm({ propiedadId }: { propiedadId: number }) {
   const [nombre, setNombre] = useState('');
@@ -35,14 +38,20 @@ export function SolicitudForm({ propiedadId }: { propiedadId: number }) {
   return (
     <form onSubmit={enviar} className="card mt-6 space-y-3 p-5">
       <h2 className="text-lg font-semibold">Quiero consultar por esta propiedad</h2>
-      <input className="input" placeholder="Tu nombre (opcional)" value={nombre}
-        onChange={(e) => setNombre(e.target.value)} />
-      <input className="input" type="email" placeholder="Tu email (opcional)" value={email}
-        onChange={(e) => setEmail(e.target.value)} />
+      <div className="space-y-1.5">
+        <Label htmlFor="solicitud-nombre">Nombre (opcional)</Label>
+        <Input id="solicitud-nombre" placeholder="Tu nombre" value={nombre}
+          onChange={(e) => setNombre(e.target.value)} />
+      </div>
+      <div className="space-y-1.5">
+        <Label htmlFor="solicitud-email">Email (opcional)</Label>
+        <Input id="solicitud-email" type="email" placeholder="tu@email.com" value={email}
+          onChange={(e) => setEmail(e.target.value)} />
+      </div>
       {mensaje && <p className="text-sm text-verde">{mensaje}</p>}
-      <button type="submit" disabled={loading} className="btn-verde w-full">
+      <Button type="submit" disabled={loading} className="w-full">
         {loading ? 'Enviando...' : 'Enviar solicitud'}
-      </button>
+      </Button>
     </form>
   );
 }

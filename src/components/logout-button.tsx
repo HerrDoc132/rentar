@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 export function LogoutButton() {
   const router = useRouter();
@@ -12,8 +13,8 @@ export function LogoutButton() {
   }
 
   return (
-    <button onClick={salir} className="btn-outline text-sm">
+    <Button onClick={salir} variant="outline" size="sm">
       Cerrar sesión
-    </button>
+    </Button>
   );
 }
