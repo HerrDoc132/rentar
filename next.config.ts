@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // El driver de libSQL para web es compatible con el runtime de Node de Vercel.
+  // El runtime Node de Vercel usa @libsql/client (libsql:// o file:); se externaliza.
   serverExternalPackages: ['@libsql/client'],
 };
 

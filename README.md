@@ -40,6 +40,19 @@ Abrí http://localhost:3000.
 | `npm run db:migrate` | Aplica migraciones |
 | `npm run db:studio` | Explorador visual local |
 | `npm run db:seed` | Carga datos demo (borra los anteriores) |
+| `npm run env:check` | Verifica variables mínimas sin mostrar valores |
+
+## Deploy en Vercel Hobby (gratis)
+
+1. Crear la DB en **Turso Free** y dejar los **overages desactivados** en el panel (sin tarjeta, $0/mes).
+2. Crear un store de **Vercel Blob FREE**.
+3. En local: `cp .env.example .env.local`, completar `TURSO_DATABASE_URL=libsql://...`, `TURSO_AUTH_TOKEN` y `BLOB_READ_WRITE_TOKEN`. Ejecutar `npm run env:check` (no muestra los valores).
+4. Aplicar schema y datos contra Turso: `npm run db:migrate` y `npm run db:seed`.
+5. Importar el repo en **Vercel Hobby**. Framework: Next.js; no hace falta configurar Root Directory porque la raíz del repo ya es `repositories/rentar`.
+6. Cargar en Vercel las mismas tres variables de entorno. **Nunca commitear `.env.local`**.
+7. Verificar post-deploy: catálogo público, login con cada rol y descarga del recibo PDF.
+
+Guía paso a paso en `../../docs/guia-creacion-proyectos.md`. Las variables de correo (Resend) se documentan en SCRUM-19.
 
 ## Estructura
 
@@ -53,6 +66,7 @@ src/services/         Reglas de negocio
 src/lib/              Auth, PDF, Blob, dinero, errores
 migrations/           SQL versionado (commitear)
 scripts/seed.ts       Datos demo
+scripts/verificar-entorno.ts  Chequeo de variables (sin secretos)
 ```
 
 ## Variables de entorno
